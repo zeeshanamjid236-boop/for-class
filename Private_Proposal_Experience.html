@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08040d">
+<title>Private Proposal Experience ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050509;color:#fff;font-family:Georgia,serif;overflow:hidden;min-height:100vh}
+.screen{position:fixed;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:22px;background:radial-gradient(circle at center,#29102e,#08060d 65%,#020204)}
+.screen.active{display:flex;animation:appear .8s ease}
+.content{width:min(650px,100%);position:relative;z-index:3}
+h1{font-size:clamp(36px,8vw,65px);margin:20px 0;color:#ffd8ed;text-shadow:0 0 25px #ff36a6}
+h2{font-size:clamp(25px,6vw,38px);margin:18px 0}
+p{font-size:18px;line-height:1.8;color:#e8cddd}
+button{border:1px solid #ff83c5;background:linear-gradient(135deg,#ff2998,#8d1b74);color:#fff;padding:15px 30px;border-radius:40px;font-size:16px;cursor:pointer;margin:15px 7px;box-shadow:0 0 25px #ff299866;transition:transform .25s,box-shadow .25s}
+button:hover{transform:scale(1.07);box-shadow:0 0 35px #ff2999}
+input{width:min(370px,90%);padding:17px;border-radius:30px;border:1px solid #ff70bd;background:#160d1c;color:#fff;text-align:center;font-size:17px;outline:none;margin:20px 0}
+input:focus{box-shadow:0 0 20px #ff36a6}
+.heart{font-size:85px;display:inline-block;filter:drop-shadow(0 0 25px #ff269b);animation:beat 1s infinite}
+.small{font-size:13px;letter-spacing:4px;color:#f5a8d5}
+.glow{color:#ff8dca;text-shadow:0 0 25px #ff36a6}
+#particles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:2}
+.particle{position:absolute;bottom:-35px;animation:float linear forwards;opacity:.9}
+.blast{position:fixed;top:50%;left:50%;width:30px;height:30px;border:3px solid #ff8dca;border-radius:50%;transform:translate(-50%,-50%);animation:blast 1s ease-out forwards;pointer-events:none;z-index:8}
+.ring{width:130px;height:130px;border:2px solid #ff8dca;border-radius:50%;margin:25px auto;display:grid;place-items:center;box-shadow:0 0 35px #ff36a6;animation:rotate 8s linear infinite}
+.finalTitle{font-size:clamp(40px,9vw,75px)}
+#noBtn{background:linear-gradient(135deg,#444,#171717);border-color:#aaa}
+#lockScreen{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle,#32102f,#030308 75%);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.lockBox{width:min(440px,100%);padding:35px 20px;border:1px solid #ff65b9;border-radius:25px;background:#100b18;box-shadow:0 0 45px #ff299966}
+#passwordError{color:#ff719f;font-size:14px;min-height:22px}
+.hint{font-size:12px;color:#b99bad;margin-top:12px}
+@keyframes appear{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes beat{50%{transform:scale(1.25)}}
+@keyframes float{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+@keyframes blast{0%{transform:translate(-50%,-50%) scale(.1);opacity:1}100%{transform:translate(-50%,-50%) scale(5);opacity:0}}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@media(max-height:650px){.heart{font-size:58px}h1{margin:12px 0}.ring{width:95px;height:95px;margin:12px auto}p{font-size:16px}button{padding:12px 22px;margin:8px 5px}}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="lockScreen">
+  <div class="lockBox">
+    <div class="heart">🔐</div>
+    <div class="small">PRIVATE EXPERIENCE</div>
+    <h1>Private Access</h1>
+    <p>Enter one of the secret names to open this surprise.</p>
+    <input type="password" id="secretPassword" placeholder="Enter password" autocomplete="off">
+    <br>
+    <button type="button" onclick="unlock()">UNLOCK ❤️</button>
+    <p id="passwordError" aria-live="polite"></p>
+    <p class="hint">A secret surprise is waiting inside ✨</p>
+  </div>
+</div>
+
+<div id="particles" aria-hidden="true"></div>
+
+<section class="screen active" id="s1">
+  <div class="content">
+    <div class="small">A SPECIAL EXPERIENCE</div>
+    <div class="heart">❤️</div>
+    <h1>Something Special</h1>
+    <p>A little surprise is waiting for someone special...</p>
+    <button onclick="go(2)">OPEN YOUR SURPRISE ✨</button>
+  </div>
+</section>
+
+<section class="screen" id="s2">
+  <div class="content">
+    <div class="small">BEFORE WE BEGIN</div>
+    <h1>Your Name?</h1>
+    <p>Write the name of the person this surprise is for.</p>
+    <input id="personName" placeholder="Enter name here..." maxlength="30">
+    <br><button onclick="saveName()">CONTINUE ❤️</button>
+  </div>
+</section>
+
+<section class="screen" id="s3">
+  <div class="content">
+    <div class="heart">💗</div>
+    <div class="small">THIS MOMENT IS FOR</div>
+    <h1 id="nameOne">Someone Special</h1>
+    <p>Today, something beautiful has been created just for you.</p>
+    <button onclick="go(4)">DISCOVER MORE ✨</button>
+  </div>
+</section>
+
+<section class="screen" id="s4">
+  <div class="content">
+    <div class="small">A LITTLE MAGIC</div>
+    <h1>One Beautiful Question...</h1>
+    <div class="ring"><span class="heart">🌹</span></div>
+    <p>Some moments deserve to be remembered forever.</p>
+    <button onclick="go(5)">UNLOCK THE MAGIC 🔐</button>
+  </div>
+</section>
+
+<section class="screen" id="s5">
+  <div class="content">
+    <div class="small">A MESSAGE FROM THE HEART</div>
+    <h1 id="nameTwo">Dear Someone</h1>
+    <p>You are someone truly special.<br>Your smile can make an ordinary moment beautiful.<br>And today, I have one question to ask...</p>
+    <button onclick="go(6)">READ MY QUESTION 💌</button>
+  </div>
+</section>
+
+<section class="screen" id="s6">
+  <div class="content">
+    <div class="heart">💍</div>
+    <div class="small">THE MOMENT HAS ARRIVED</div>
+    <h1 class="glow">Will You Be Mine?</h1>
+    <p id="questionName">A special question for you...</p>
+    <button id="yesBtn" onclick="celebrate()">YES! ❤️</button>
+    <button id="noBtn" onmouseenter="moveNo()" onclick="moveNo()">NO 🙈</button>
+    <p style="font-size:12px;margin-top:20px">A little question, a beautiful memory.</p>
+  </div>
+</section>
+
+<section class="screen" id="s7">
+  <div class="content">
+    <div class="heart">💖</div>
+    <div class="small">A MOMENT TO REMEMBER</div>
+    <h1 class="finalTitle">YOU SAID YES!</h1>
+    <h2 id="finalName" class="glow">My Special Person</h2>
+    <p>This moment is now a beautiful memory.<br>Thank you for making this day special. ❤️</p>
+    <div class="ring">💎</div>
+    <button onclick="restart()">EXPERIENCE AGAIN ↻</button>
+  </div>
+</section>
+
+<script>
+// Any one of these names will unlock the website.
+// Password matching ignores capital/small letter differences.
+const MY_PASSWORDS = [
+  "Zeeshan", "Asad", "Ahmad", "Sunny",
+  "Zerak", "Amina", "Aimen", "Tanzila",
+  "Aysha", "Maryam", "Zia", "Ayaz"
+];
+
+let current = 1;
+let specialName = "Someone Special";
+
+function unlock(){
+  const entered = document.getElementById("secretPassword").value.trim().toLowerCase();
+  const valid = MY_PASSWORDS.some(name => name.toLowerCase() === entered);
+
+  if(valid){
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("passwordError").textContent = "";
+    blast();
+    hearts(30);
+  } else {
+    document.getElementById("passwordError").textContent = "Wrong password! Try again 🔒";
+  }
+}
+
+document.getElementById("secretPassword").addEventListener("keydown", function(event){
+  if(event.key === "Enter") unlock();
+});
+
+function go(number){
+  document.getElementById("s" + current).classList.remove("active");
+  current = number;
+  document.getElementById("s" + current).classList.add("active");
+  blast();
+  hearts(15);
+}
+
+function saveName(){
+  const value = document.getElementById("personName").value.trim();
+  if(!value){
+    alert("Please write a name first ❤️");
+    return;
+  }
+  specialName = value;
+  document.getElementById("nameOne").textContent = specialName;
+  document.getElementById("nameTwo").textContent = "Dear " + specialName;
+  document.getElementById("questionName").textContent = specialName + ", would you make this moment special?";
+  document.getElementById("finalName").textContent = specialName;
+  go(3);
+}
+
+function blast(){
+  const b = document.createElement("div");
+  b.className = "blast";
+  document.body.appendChild(b);
+  setTimeout(() => b.remove(), 1100);
+}
+
+function hearts(amount = 8){
+  const container = document.getElementById("particles");
+  const symbols = ["❤️","💗","💕","✨","🌸","💖"];
+  for(let i = 0; i < amount; i++){
+    const el = document.createElement("span");
+    el.className = "particle";
+    el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left = Math.random() * 100 + "%";
+    el.style.fontSize = (15 + Math.random() * 25) + "px";
+    el.style.animationDuration = (3 + Math.random() * 5) + "s";
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 8500);
+  }
+}
+
+function moveNo(){
+  const btn = document.getElementById("noBtn");
+  const maxX = Math.max(0, window.innerWidth - btn.offsetWidth - 20);
+  const maxY = Math.max(0, window.innerHeight - btn.offsetHeight - 20);
+  btn.style.position = "fixed";
+  btn.style.left = (10 + Math.random() * maxX) + "px";
+  btn.style.top = (10 + Math.random() * maxY) + "px";
+  btn.style.zIndex = "10";
+}
+
+function celebrate(){
+  go(7);
+  for(let i = 0; i < 12; i++){
+    setTimeout(() => { blast(); hearts(15); }, i * 250);
+  }
+}
+
+function restart(){
+  document.getElementById("s7").classList.remove("active");
+  current = 1;
+  document.getElementById("s1").classList.add("active");
+  const btn = document.getElementById("noBtn");
+  btn.style.position = "static";
+  btn.style.left = "";
+  btn.style.top = "";
+  hearts(20);
+}
+
+setInterval(() => hearts(2), 1800);
+</script>
+</body>
+</html>
